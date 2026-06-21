@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
+    "deploy:azure": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/deploy-azure.ps1",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"
   },
