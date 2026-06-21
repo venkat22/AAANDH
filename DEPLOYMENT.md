@@ -67,5 +67,6 @@ Newest first. Add a row after each deploy.
 
 | Date (UTC) | Commit    | Environment | Method        | Notes                                         |
 | ---------- | --------- | ----------- | ------------- | --------------------------------------------- |
+| 2026-06-21 | `513b17e` | production  | `swa deploy`  | mailto contact form + motion/interaction polish |
 | 2026-06-21 | `7fba815` | production  | `swa deploy`  | Rebrand to HowardTech                          |
 | 2026-06-21 | `e109b98` | production  | `swa deploy`  | Initial Azure SWA deploy of the light-theme redesign |
