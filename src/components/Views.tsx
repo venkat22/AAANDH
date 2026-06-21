@@ -3,460 +3,261 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useState } from 'react';
 import { motion } from 'motion/react';
-import { CONSULTANTS, COMPETENCIES } from '../constants';
-import { Shield, Zap, TrendingUp, Workflow, Rocket, History, Mail, MapPin } from 'lucide-react';
+import {
+  ArrowRight, Check, Zap, ShieldCheck, Workflow, Gauge, Bot, Users,
+  Landmark, HeartPulse, ShoppingCart, Boxes, Truck, Building2,
+  Search, PencilRuler, Activity, Rocket, History, Network,
+  Plus, Minus, Mail, MapPin, Phone,
+  type LucideIcon,
+} from 'lucide-react';
+import { CONSULTANTS, COMPETENCIES, INDUSTRIES, PROCESS_PHASES, AI_SERVICES, TECHNOLOGIES } from '../constants';
+
+const iconMap: Record<string, LucideIcon> = {
+  Landmark, HeartPulse, ShoppingCart, Boxes, Truck, Building2,
+  Search, PencilRuler, Zap, ShieldCheck, Rocket, Activity,
+  History, Network, Workflow,
+};
+
+function SectionHeading({ eyebrow, title, center = false }: { eyebrow: string; title: string; center?: boolean }) {
+  return (
+    <div className={`mb-14 ${center ? 'text-center' : ''}`}>
+      <span className="eyebrow">{eyebrow}</span>
+      <h2 className="text-3xl md:text-4xl font-extrabold text-brand-ink mt-3 tracking-tight">{title}</h2>
+      <div className={`w-16 h-1 bg-brand-accent rounded-full mt-5 ${center ? 'mx-auto' : ''}`} />
+    </div>
+  );
+}
 
 export function HomeView({ onNavigate }: { onNavigate: (v: string) => void }) {
   return (
-    <div className="space-y-32">
-      {/* Hero Section */}
-      <section className="min-h-[85vh] flex flex-col items-center justify-center text-center px-8 relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-accent/5 rounded-full blur-[100px] animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-brand-cyan/10 rounded-full blur-[120px] animate-pulse delay-1000" />
-        </div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="relative z-10 max-w-5xl"
-        >
-          <div className="inline-flex items-center gap-2 mb-8 bg-brand-surface-light/50 px-4 py-1.5 border border-brand-accent/20 rounded-full">
-            <span className="w-2 h-2 rounded-full bg-brand-accent animate-agent-pulse" />
-            <span className="text-[10px] font-bold text-brand-accent uppercase tracking-[0.2em]">
-              Autonomous Efficiency Engaged
-            </span>
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl font-black text-white mb-8 leading-[1.05] tracking-tight">
-            Expert-Led, <span className="cyan-gradient-text">Agent-Driven</span><br />
-            Enterprise Solutions
-          </h1>
-          
-          <p className="text-lg md:text-xl text-brand-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
-            We bridge the gap between high-level IT strategy and the agentic future. Our senior consultants deploy bespoke AI workflows to secure your infrastructure and automate complexity.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <motion.button 
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => onNavigate('contact')}
-              className="bg-brand-accent text-brand-bg px-10 py-5 font-black text-sm tracking-[0.2em] uppercase hover:brightness-110 transition-all shadow-[0_0_20px_rgba(100,255,218,0.2)]"
-            >
-              Deploy Strategy
-            </motion.button>
-            <motion.button 
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => onNavigate('methodology')}
-              className="bg-transparent text-white px-10 py-5 font-black text-sm tracking-[0.2em] uppercase border border-white/20 hover:border-brand-accent/50 hover:bg-brand-accent/5 transition-all"
-            >
-              View Methodology
-            </motion.button>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Core Architecture Section */}
-      <section className="px-8 max-w-7xl mx-auto">
-        <div className="mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 uppercase tracking-wider">Core Architecture</h2>
-          <div className="w-24 h-1 bg-brand-accent" />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <div className="md:col-span-8 glass-card p-12 flex flex-col justify-end min-h-[450px] relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-20 transition-opacity">
-              <Zap className="w-64 h-64 text-brand-accent" />
+    <div>
+      {/* Hero */}
+      <section className="relative overflow-hidden pt-36 pb-24 px-6 md:px-10">
+        <div className="absolute -top-32 -right-24 w-[480px] h-[480px] bg-brand-accent/10 rounded-full blur-[120px]" />
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <div className="inline-flex items-center gap-2 mb-6 bg-brand-accent/10 px-3.5 py-1.5 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-brand-accent animate-agent-pulse" />
+              <span className="text-[11px] font-bold text-brand-accent-dark uppercase tracking-[0.18em]">Agent Workforce Online</span>
             </div>
-            <h3 className="text-3xl font-bold text-brand-accent mb-6 uppercase tracking-tight">Agentic Workflow Integration</h3>
-            <p className="text-brand-text-secondary text-lg max-w-xl leading-relaxed">
-              Traditional automation is static. Our "Sovereign Agents" adapt to real-time enterprise data, executing complex multi-step processes across your legacy and cloud infrastructure with surgical precision.
+            <h1 className="text-4xl md:text-6xl font-black text-brand-ink leading-[1.05] tracking-tight mb-6">
+              Ship production software at <span className="accent-gradient-text">agent speed</span>
+            </h1>
+            <p className="text-lg text-brand-text-secondary leading-relaxed mb-9 max-w-xl">
+              We pair senior engineers with an autonomous agent workforce to design, build, and ship enterprise software — accelerating your roadmap without expanding headcount.
             </p>
-          </div>
-
-          <div className="md:col-span-4 glass-card p-10 flex flex-col items-start gap-8">
-            <div className="w-14 h-14 flex items-center justify-center bg-brand-surface ring-1 ring-brand-accent/20">
-              <Shield className="text-brand-accent w-6 h-6" />
+            <div className="flex flex-col sm:flex-row gap-4">
+              <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => onNavigate('contact')} className="btn-primary px-7 py-3.5 text-sm">
+                Get Started <ArrowRight className="w-4 h-4" />
+              </motion.button>
+              <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={() => onNavigate('methodology')} className="btn-ghost px-7 py-3.5 text-sm">
+                View Methodology
+              </motion.button>
             </div>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">Hardened Security</h3>
-            <p className="text-brand-text-secondary leading-relaxed">
-              Zero-trust architectures designed for the age of autonomous compute. Every agent action is logged, audited, and confined to precise cryptographic boundaries.
-            </p>
-          </div>
-
-          <div className="md:col-span-4 glass-card p-10 flex flex-col items-start gap-8">
-            <div className="w-14 h-14 flex items-center justify-center bg-brand-surface ring-1 ring-brand-accent/20">
-              <TrendingUp className="text-brand-accent w-6 h-6" />
+            <div className="flex items-center gap-6 mt-10 text-sm text-brand-text-secondary">
+              <span className="flex items-center gap-2"><Check className="w-4 h-4 text-brand-accent" /> 3x faster delivery</span>
+              <span className="flex items-center gap-2"><Check className="w-4 h-4 text-brand-accent" /> Senior-led</span>
             </div>
-            <h3 className="text-2xl font-bold text-white uppercase tracking-tight">Strategic Oversight</h3>
-            <p className="text-brand-text-secondary leading-relaxed">
-              Humans remain at the helm. Our dashboard provides real-time telemetry into agent decision-making, ensuring total alignment with corporate governance.
-            </p>
-          </div>
+          </motion.div>
 
-          <div className="md:col-span-8 glass-card p-12 relative overflow-hidden">
-            <img 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuByv_P_vAEvE6BCUkwqrfWDAODCXQLS8JDWFVlCHBx1y1Jx96PGKz-dAmRUJeQMNUIX2q8poZ_rlMedNWgwrlAnH9a5DwPAWSFiVzb_iZouZ9SAKJo1EXFLDfKN4nGenF_sBlzfR2KR-repIbODEV5rdY577K5zVTv-BKtvBsHFKpK2GnEp0be3sAErsPG5QhblbtLnDUMPxrTPvM-6Ib9Bxo8hDmgigERnTD0be0T-tBxtU2XpEpg7-s8ijcfIE8xm2KFz7LmnMpws" 
-              alt="Data Center"
-              className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"
-            />
-            <div className="relative z-10 flex flex-col h-full justify-center">
-              <h3 className="text-3xl font-bold text-white mb-6 uppercase tracking-tight">Enterprise Resilience</h3>
-              <p className="text-brand-text-secondary text-lg max-w-md leading-relaxed">
-                Scale without increasing operational headcount. Our methodologies allow systems to self-heal and optimize under the guidance of senior-level engineering principles.
-              </p>
+          {/* Terminal mock */}
+          <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.1 }} className="card p-0 overflow-hidden">
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-brand-border bg-brand-surface">
+              <span className="w-3 h-3 rounded-full bg-red-400" />
+              <span className="w-3 h-3 rounded-full bg-amber-400" />
+              <span className="w-3 h-3 rounded-full bg-green-400" />
+              <span className="ml-3 text-xs font-mono text-brand-text-secondary">sovereign — delivery pipeline</span>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Consultants Section */}
-      <section className="bg-brand-surface-light/20 py-32 px-8 border-y border-brand-accent/5">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl font-bold text-white mb-6 uppercase tracking-tight">The Sovereign Council</h2>
-              <p className="text-brand-text-secondary text-lg leading-relaxed">
-                Four world-class architects specializing in the intersection of AI orchestration, infrastructure security, and enterprise transformation.
-              </p>
-            </div>
-            <div className="text-brand-accent text-xs font-black uppercase tracking-[0.3em] border-b border-brand-accent pb-2">
-              Senior Leadership
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {CONSULTANTS.map((c) => (
-              <motion.div 
-                key={c.id} 
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                className="group"
-              >
-                <div className="relative aspect-[3/4] overflow-hidden mb-6 bg-brand-surface">
-                  <img 
-                    src={c.image} 
-                    alt={c.name} 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-bg to-transparent opacity-60" />
+            <div className="p-6 font-mono text-[13px] space-y-3 bg-white">
+              {[
+                { label: 'agent/scaffold', task: 'generate service skeleton', done: true },
+                { label: 'agent/implement', task: 'build auth + billing module', done: true },
+                { label: 'agent/test', task: 'write integration suite', running: true },
+                { label: 'agent/review', task: 'static analysis + audit', queued: true },
+              ].map((l) => (
+                <div key={l.label} className="flex items-center gap-3">
+                  {l.done && <Check className="w-4 h-4 text-brand-accent shrink-0" />}
+                  {l.running && <span className="w-3.5 h-3.5 rounded-full bg-brand-accent animate-agent-pulse shrink-0" />}
+                  {l.queued && <span className="w-3.5 h-3.5 rounded-full border-2 border-brand-border shrink-0" />}
+                  <span className="text-brand-accent-dark">{l.label}</span>
+                  <span className="text-brand-text-secondary truncate">{l.task}</span>
                 </div>
-                <h4 className="text-xl font-bold text-white mb-1 uppercase">{c.name}</h4>
-                <p className="text-brand-accent text-xs font-bold uppercase tracking-widest mb-4">{c.role}</p>
-                <p className="text-brand-text-secondary text-sm leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity">
-                  {c.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="px-8 pb-32">
-        <div className="max-w-4xl mx-auto glass-card p-16 text-center border-t-2 border-brand-accent relative overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-brand-accent/5 blur-[80px]" />
-          <h2 className="text-4xl font-bold text-white mb-8 leading-tight uppercase">Initialize Your Sovereign Strategy</h2>
-          <p className="text-lg text-brand-text-secondary mb-12 max-w-2xl mx-auto">
-            Join the vanguard of enterprises leveraging agentic workflows for unprecedented operational clarity.
-          </p>
-          <motion.button 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => onNavigate('contact')}
-            className="bg-brand-accent text-brand-bg px-12 py-6 font-black text-md tracking-[0.2em] uppercase hover:brightness-110 transition-all"
-          >
-            Request Consultation
-          </motion.button>
-        </div>
-      </section>
-    </div>
-  );
-}
-
-export function MethodologyView() {
-  const steps = [
-    { num: '01', title: 'Orchestration', desc: 'Senior experts architect the solution blueprints and decompose requirements into precise agentic tasks.', icon: Workflow },
-    { num: '02', title: 'Generation', desc: 'Parallel agent chains execute development tasks in synchronous environments at 10x velocity.', icon: Zap },
-    { num: '03', title: 'Validation', desc: 'Automated testing agents and human audits verify every line against performance protocols.', icon: Shield },
-    { num: '04', title: 'Deployment', desc: 'Seamless integration into your production environment with fully documented, sovereign ownership.', icon: Rocket }
-  ];
-
-  function RocketIcon(props: any) {
-    return (
-      <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
-        <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
-        <path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-4 5-4"/>
-        <path d="M12 15v5s3.03-.55 5-2c2.2-1.62 4-5 4-5"/>
-      </svg>
-    )
-  }
-
-  return (
-    <div className="pt-20 space-y-32">
-      <section className="max-w-7xl mx-auto px-8 text-center mt-32">
-        <div className="inline-flex items-center gap-2 mb-8 bg-brand-surface-light/50 px-4 py-1.5 border border-brand-accent/20 rounded-full">
-          <span className="text-[10px] font-bold text-brand-accent uppercase tracking-[0.2em]">The Agentic Edge</span>
-        </div>
-        <h1 className="text-5xl md:text-7xl font-black text-white mb-10 max-w-5xl mx-auto leading-tight">
-          4 Senior Experts. <span className="text-brand-accent">100+ Agents.</span><br />
-          Unlimited Precision.
-        </h1>
-        <p className="text-xl text-brand-text-secondary max-w-3xl mx-auto leading-relaxed">
-          We've replaced the bloat of traditional junior-heavy teams with a proprietary orchestration layer where elite consultants lead a tireless agentic workforce.
-        </p>
-      </section>
-
-      {/* Orchestration Core */}
-      <section className="max-w-7xl mx-auto px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          <div className="lg:col-span-7 glass-card p-12">
-            <h2 className="text-3xl font-bold text-white mb-6 uppercase tracking-tight">The Orchestration Core</h2>
-            <p className="text-brand-text-secondary text-lg mb-10 leading-relaxed max-w-xl">
-              Four world-class architects don't just write code; they design the system prompts, define constraints, and audit the output of 24/7 AI labor.
-            </p>
-            <div className="flex gap-4">
-              {CONSULTANTS.map(c => (
-                <img key={c.id} src={c.image} className="w-16 h-16 rounded-lg object-cover grayscale hover:grayscale-0 transition-all border border-brand-accent/20" alt={c.name} />
               ))}
-            </div>
-          </div>
-          <div className="lg:col-span-5 relative overflow-hidden rounded-sm min-h-[300px]">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQhLVo-mhxxwB61kdf6M2arMn1TrOLw9CyACRtFHIigOZpXy8PzuS3FW8GybTbEBNq_WxzOtgPHKup7WqQIh8_ze-rmCUuffQ8ZGVerFe_hSRx4kfzxUZLVyd1LUIfdijAIVc1P6MB9bmbMfBbFyzKb84uXTIroj8i8WNFbJ0X1XR4OBrrzG5hOoUhMQntqKi_1mIWcdbq9qHHOwXYIBtANaqltWqHpfRhX8mOcq3PmtT7LMASt3NuKDlcrKQAy1BdCGjsmYDjbi1m" alt="Analysis" className="absolute inset-0 w-full h-full object-cover brightness-50" />
-            <div className="absolute inset-0 flex items-center justify-center text-center">
-              <div>
-                <div className="text-6xl font-black text-brand-accent mb-2">98%</div>
-                <div className="text-xs uppercase font-bold tracking-widest text-white">Code Accuracy Rate</div>
+              <div className="pt-3 mt-1 border-t border-brand-border text-brand-text-secondary">
+                <span className="text-brand-ink font-semibold">4 agents</span> active · <span className="text-brand-ink font-semibold">12s</span> avg cycle
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* The Process */}
-      <section className="bg-brand-surface py-32 border-y border-brand-accent/5">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl font-bold text-white mb-4 uppercase tracking-widest">The Process</h2>
-            <div className="w-24 h-1 bg-brand-accent mx-auto" />
-          </div>
+      {/* Stats band */}
+      <section className="border-y border-brand-border bg-brand-surface">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
+          {[
+            { stat: '3x', label: 'Faster delivery velocity' },
+            { stat: '98%', label: 'Automated code accuracy' },
+            { stat: '100+', label: 'Agents in the workforce' },
+            { stat: '4', label: 'Senior architects leading' },
+          ].map((s) => (
+            <div key={s.label} className="text-center">
+              <div className="text-4xl md:text-5xl font-black text-brand-ink mb-2">{s.stat}</div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-brand-text-secondary">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-            {steps.map((s) => (
-              <div key={s.num} className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <span className="text-4xl font-black text-brand-accent/10">{s.num}</span>
-                  <s.icon className="text-brand-accent w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-white uppercase">{s.title}</h3>
-                <p className="text-sm text-brand-text-secondary leading-relaxed uppercase tracking-tighter">
-                  {s.desc}
-                </p>
-              </div>
+      {/* Fifty-fifty intro */}
+      <section className="max-w-7xl mx-auto px-6 md:px-10 py-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span className="eyebrow">Why Sovereign Tech</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-brand-ink mt-3 mb-6 tracking-tight leading-tight">
+            Engineering velocity without the headcount
+          </h2>
+          <p className="text-brand-text-secondary text-lg leading-relaxed mb-8">
+            Traditional dev shops scale by adding junior engineers and overhead. We scale by orchestrating agents under senior supervision — so you get the speed of a large team with the judgment of a small, elite one.
+          </p>
+          <ul className="space-y-4">
+            {[
+              'Create customized solutions tailored to your business',
+              'Cut delivery time and operational overhead',
+              'Increase output and realize value faster',
+            ].map((t) => (
+              <li key={t} className="flex items-start gap-3">
+                <span className="mt-0.5 w-6 h-6 rounded-full bg-brand-accent/10 flex items-center justify-center shrink-0">
+                  <Check className="w-3.5 h-3.5 text-brand-accent" />
+                </span>
+                <span className="text-brand-text-primary">{t}</span>
+              </li>
             ))}
+          </ul>
+        </div>
+        <div className="grid grid-cols-2 gap-5">
+          {[
+            { icon: Zap, title: 'Parallel agents', desc: 'Many tasks executed at once' },
+            { icon: ShieldCheck, title: 'Audited output', desc: 'Every change reviewed' },
+            { icon: Gauge, title: 'Faster cycles', desc: 'Days, not sprints' },
+            { icon: Bot, title: '24/7 workforce', desc: 'Tireless and consistent' },
+          ].map((c) => (
+            <div key={c.title} className="card p-7">
+              <c.icon className="w-8 h-8 text-brand-accent mb-4" />
+              <h3 className="font-bold text-brand-ink mb-1.5">{c.title}</h3>
+              <p className="text-sm text-brand-text-secondary leading-relaxed">{c.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Industries */}
+      <section className="bg-brand-surface border-y border-brand-border py-24">
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <SectionHeading eyebrow="Industries" title="Delivered across industries" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {INDUSTRIES.map((ind) => {
+              const Icon = iconMap[ind.icon] ?? Workflow;
+              return (
+                <motion.div key={ind.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4 }} className="card p-8">
+                  <div className="w-12 h-12 rounded-lg bg-brand-accent/10 flex items-center justify-center mb-5">
+                    <Icon className="w-6 h-6 text-brand-accent" />
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-ink mb-2">{ind.name}</h3>
+                  <p className="text-sm text-brand-text-secondary leading-relaxed">{ind.description}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Technical Shift Table */}
-      <section className="max-w-7xl mx-auto px-8 pb-32">
-        <h2 className="text-4xl font-bold text-white mb-20 text-center uppercase tracking-widest">The Shift</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse glass-card overflow-hidden">
-            <thead>
-              <tr className="border-b border-brand-accent/10">
-                <th className="p-8 text-xs font-black uppercase tracking-[0.2em] text-brand-text-secondary">Dimension</th>
-                <th className="p-8 text-xs font-black uppercase tracking-[0.2em] text-brand-text-secondary">Traditional Dev Shop</th>
-                <th className="p-8 text-xs font-black uppercase tracking-[0.3em] text-brand-accent bg-brand-accent/5">The Sovereign Edge</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b border-brand-accent/5">
-                <td className="p-8 font-bold text-lg text-white uppercase tracking-tight">Team Dynamics</td>
-                <td className="p-8 text-brand-text-secondary opacity-70">2 Seniors + 12 Juniors (High overhead)</td>
-                <td className="p-8 text-white font-medium bg-brand-accent/5">4 Seniors + Infinite Agent Workers</td>
-              </tr>
-              <tr className="border-b border-brand-accent/5">
-                <td className="p-8 font-bold text-lg text-white uppercase tracking-tight">Reliability</td>
-                <td className="p-8 text-brand-text-secondary opacity-70">Varies; manual peer reviews</td>
-                <td className="p-8 text-white font-medium bg-brand-accent/5">Deterministic prompts; multi-agent validation</td>
-              </tr>
-              <tr>
-                <td className="p-8 font-bold text-lg text-white uppercase tracking-tight">Velocity</td>
-                <td className="p-8 text-brand-text-secondary opacity-70">Bi-weekly sprint cycles</td>
-                <td className="p-8 text-white font-medium bg-brand-accent/5">Daily feature production cycles</td>
-              </tr>
-            </tbody>
-          </table>
+      {/* Team */}
+      <section className="max-w-7xl mx-auto px-6 md:px-10 py-24">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+          <div className="max-w-2xl">
+            <span className="eyebrow">The Team</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-brand-ink mt-3 tracking-tight">The Sovereign Council</h2>
+            <p className="text-brand-text-secondary text-lg mt-4 leading-relaxed">
+              Four world-class architects at the intersection of AI orchestration, infrastructure, and secure delivery.
+            </p>
+          </div>
+          <button onClick={() => onNavigate('methodology')} className="text-brand-accent font-semibold text-sm inline-flex items-center gap-2 hover:gap-3 transition-all">
+            How we work <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {CONSULTANTS.map((c) => (
+            <div key={c.id} className="card overflow-hidden group">
+              <div className="relative aspect-[4/5] overflow-hidden bg-brand-surface-light">
+                <img src={c.image} alt={c.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+              </div>
+              <div className="p-6">
+                <h4 className="font-bold text-brand-ink">{c.name}</h4>
+                <p className="text-brand-accent text-xs font-bold uppercase tracking-widest mt-1 mb-3">{c.role}</p>
+                <p className="text-sm text-brand-text-secondary leading-relaxed">{c.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
-    </div>
-  );
-}
 
-export function ContactView() {
-  return (
-    <div className="pt-20 max-w-7xl mx-auto px-8">
-      <div className="mt-32 mb-20">
-        <div className="flex items-center gap-2 mb-4">
-          <div className="w-2 h-2 rounded-full bg-brand-accent animate-agent-pulse" />
-          <span className="text-brand-accent text-xs font-bold uppercase tracking-[0.3em]">Available for Q4 Engagements</span>
-        </div>
-        <h1 className="text-5xl md:text-7xl font-black text-white mb-8">
-          Architecting the next generation of <span className="cyan-gradient-text">agentic intelligence.</span>
-        </h1>
-        <p className="text-xl text-brand-text-secondary max-w-2xl leading-relaxed">
-          Connect with our lead consultants to define your project scope, security parameters, and deployment roadmap.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-32">
-        <div className="lg:col-span-8">
-          <section className="glass-card p-12">
-            <h2 className="text-3xl font-bold text-white mb-12 uppercase tracking-tight">Project Inquiry</h2>
-            <form className="space-y-10" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-3">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-text-secondary">Lead Contact</label>
-                  <input type="text" placeholder="Full Name" className="w-full bg-transparent border-0 border-b border-brand-accent/20 focus:border-brand-accent focus:ring-0 transition-colors py-4 text-white" />
-                </div>
-                <div className="space-y-3">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-text-secondary">Enterprise Email</label>
-                  <input type="email" placeholder="name@company.com" className="w-full bg-transparent border-0 border-b border-brand-accent/20 focus:border-brand-accent focus:ring-0 transition-colors py-4 text-white" />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="relative group">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-text-secondary mb-3 inline-block">Service Track</label>
-                  <select className="w-full bg-transparent border-0 border-b border-brand-accent/20 focus:border-brand-accent focus:ring-0 text-white py-4 appearance-none">
-                    <option>Cyber-Security Audit</option>
-                    <option>Agentic AI Integration</option>
-                    <option>Cloud Infrastructure</option>
-                  </select>
-                </div>
-                <div className="relative group">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-text-secondary mb-3 inline-block">Target Budget</label>
-                  <select className="w-full bg-transparent border-0 border-b border-brand-accent/20 focus:border-brand-accent focus:ring-0 text-white py-4 appearance-none">
-                    <option>$50k - $100k</option>
-                    <option>$100k - $500k</option>
-                    <option>$500k+</option>
-                  </select>
-                </div>
-                <div className="relative group">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-text-secondary mb-3 inline-block">Timeline</label>
-                  <select className="w-full bg-transparent border-0 border-b border-brand-accent/20 focus:border-brand-accent focus:ring-0 text-white py-4 appearance-none">
-                    <option>Next 30 Days</option>
-                    <option>Next 3 Months</option>
-                    <option>Strategic Partnership</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-brand-text-secondary">Technical Requirements</label>
-                  <textarea placeholder="Briefly describe the challenge..." rows={4} className="w-full bg-transparent border-0 border-b border-brand-accent/20 focus:border-brand-accent focus:ring-0 transition-colors py-4 text-white resize-none" />
-              </div>
-
-              <div className="flex justify-end pt-8">
-                <motion.button 
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-brand-accent text-brand-bg px-12 py-5 font-black uppercase tracking-[0.2em] text-xs"
-                >
-                  Initialize Inquiry
-                </motion.button>
-              </div>
-            </form>
-          </section>
-        </div>
-
-        <div className="lg:col-span-4 space-y-12">
-          <div className="glass-card p-10 space-y-8">
-            <h3 className="text-xs font-black uppercase tracking-[0.3em] text-brand-text-secondary">Contact Nodes</h3>
-            <div className="space-y-8">
-              <div className="flex gap-4">
-                <div className="bg-brand-accent/10 p-3 ring-1 ring-brand-accent/20 rounded-sm">
-                  <Workflow className="text-brand-accent w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-white font-bold uppercase tracking-tight">HQ - Berlin Hub</p>
-                  <p className="text-xs text-brand-text-secondary">Torstraße 112, 10119 Berlin</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="bg-brand-accent/10 p-3 ring-1 ring-brand-accent/20 rounded-sm">
-                  <Shield className="text-brand-accent w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-white font-bold uppercase tracking-tight">Encrypted Comms</p>
-                  <p className="text-xs text-brand-text-secondary">Signal: +49 176 000 0000</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative group overflow-hidden rounded-sm h-64">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBomdLKUIckBGFzjhkZSVZXVO1It_iefADxHWzhL0UlI9HbIllfo6uWGBRKhkilQo59l9HRaAvOSAkHMw5yjzAvFWcu2WerNJpzJj3HM_TrMTbdernn2v88RLlqydy00hBgunSRLatynLjvt9o4mtaff6sXWAnCGq_6L-tlyVuXoBwCvbvDtjHBbPX8mSGkyf4A4s3BCAMtLnyWgHLSAVBgCf4l1C04r6PYlIyfsgfMyPhYQl0ObQpRJYNP5v_jvL4yxwOxA3aJUIFh" alt="Berlin Office" className="w-full h-full object-cover filter brightness-50 group-hover:scale-110 transition-transform duration-1000" />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-bg to-transparent opacity-80" />
-            <div className="absolute bottom-6 left-6">
-              <p className="text-white font-black text-2xl tracking-tighter uppercase">Berlin Hub</p>
-              <p className="text-brand-accent text-[10px] font-bold uppercase tracking-widest">Office_01</p>
-            </div>
+      {/* CTA */}
+      <section className="px-6 md:px-10 pb-24">
+        <div className="max-w-6xl mx-auto rounded-2xl bg-brand-ink text-white px-8 md:px-16 py-16 text-center relative overflow-hidden">
+          <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-80 h-80 bg-brand-accent/20 blur-[100px]" />
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-4xl font-black mb-5 tracking-tight">Initialize your delivery strategy</h2>
+            <p className="text-white/70 text-lg max-w-2xl mx-auto mb-9">
+              Join the teams shipping faster with an expert-led, agent-driven workforce.
+            </p>
+            <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} onClick={() => onNavigate('contact')} className="btn-primary px-8 py-4 text-sm">
+              Request a consultation <ArrowRight className="w-4 h-4" />
+            </motion.button>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
 
 export function ServicesView() {
+  const [openId, setOpenId] = useState<string | null>(AI_SERVICES[0].id);
+
   return (
-    <div className="pt-20 max-w-7xl mx-auto px-8">
-      <section className="py-32 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center lg:mt-24">
-        <div className="lg:col-span-7">
-          <div className="flex items-center gap-2 mb-8 uppercase tracking-[0.3em] font-black text-brand-accent text-xs">
-            <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
-            Agentic Intelligence Enabled
+    <div>
+      {/* Hero */}
+      <section className="relative overflow-hidden pt-36 pb-20 px-6 md:px-10">
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-brand-accent/10 rounded-full blur-[120px]" />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <div className="inline-flex items-center gap-2 mb-6 bg-brand-accent/10 px-3.5 py-1.5 rounded-full">
+            <span className="w-2 h-2 rounded-full bg-brand-accent animate-agent-pulse" />
+            <span className="text-[11px] font-bold text-brand-accent-dark uppercase tracking-[0.18em]">Capabilities</span>
           </div>
-          <h1 className="text-5xl md:text-8xl font-black text-white mb-10 leading-[0.95] tracking-tighter">
-            Enterprise Solutions<br />
-            <span className="text-brand-accent">Engineered at Scale</span>
+          <h1 className="text-4xl md:text-6xl font-black text-brand-ink leading-[1.05] tracking-tight mb-6">
+            Enterprise software, <span className="accent-gradient-text">engineered at scale</span>
           </h1>
-          <p className="text-xl text-brand-text-secondary leading-relaxed max-w-2xl mb-12">
-            We deploy autonomous coding agents and senior architects to deliver high-performance enterprise applications with mathematical precision.
+          <p className="text-lg text-brand-text-secondary leading-relaxed max-w-2xl mx-auto">
+            We deploy autonomous coding agents and senior architects to deliver high-performance applications with precision — across the full software lifecycle.
           </p>
-          <div className="flex gap-6">
-            <button className="bg-brand-accent text-brand-bg px-10 py-5 font-black uppercase text-xs tracking-widest">Explore Capability</button>
-            <button className="border border-brand-accent/40 text-brand-accent px-10 py-5 font-black uppercase text-xs tracking-widest hover:bg-brand-accent/5">Technical Specs</button>
-          </div>
-        </div>
-        <div className="lg:col-span-5 h-[500px]">
-          <div className="glass-card h-full p-4">
-             <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB46hAeRx9bNeRVM6lI_alsCNBf2SlM6Xia2mPNTBmXQu36_fklZ6FeAapKsJsh_L32p0n2OkO-3kX5AiguIdU6gRJOpWHO8eG8WRlfADKVD3GRszoJzuviCAJ5vnvwuC7YvDEP5Zp9XqzNgwMr5lXs3P3FNiI7tIZ0GiLPE-gifdWa7gKrGNX15-_BXqw7HymqKA6jB0cGVCpNyU0Cz-3wxZ05XIXLfN0OAKwjJWJxZ1YHK1XjB-JbRNRHu90o06SEk0xwtgrDgT9J" className="w-full h-full object-cover grayscale brightness-75" alt="Infrastructure" />
-          </div>
         </div>
       </section>
 
-      <section className="pb-32">
-        <h2 className="text-3xl font-black text-white mb-20 uppercase tracking-[0.2em] text-center">Core Competencies</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {COMPETENCIES.map(item => {
-            const Icon = item.id === 'app-dev' ? Rocket : item.id === 'legacy' ? History : Workflow;
+      {/* Core competencies */}
+      <section className="max-w-7xl mx-auto px-6 md:px-10 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {COMPETENCIES.map((item) => {
+            const Icon = item.id === 'app-dev' ? Rocket : item.id === 'legacy' ? History : Network;
             return (
-              <div key={item.id} className="glass-card p-10 flex flex-col justify-between min-h-[450px] group">
-                <div>
-                  <Icon className="text-brand-accent w-10 h-10 mb-8 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-2xl font-bold text-white mb-6 uppercase tracking-tight leading-tight">{item.title}</h3>
-                  <p className="text-brand-text-secondary leading-relaxed mb-10">{item.description}</p>
+              <div key={item.id} className="card p-9 flex flex-col">
+                <div className="w-12 h-12 rounded-lg bg-brand-accent/10 flex items-center justify-center mb-6">
+                  <Icon className="w-6 h-6 text-brand-accent" />
                 </div>
-                <ul className="space-y-4 pt-10 border-t border-white/5">
-                  {item.tags.map(tag => (
-                    <li key={tag} className="text-[10px] font-black uppercase tracking-widest text-brand-accent opacity-60 flex items-center gap-2">
+                <h3 className="text-xl font-bold text-brand-ink mb-3">{item.title}</h3>
+                <p className="text-brand-text-secondary leading-relaxed mb-6">{item.description}</p>
+                <ul className="space-y-2.5 mt-auto pt-6 border-t border-brand-border">
+                  {item.tags.map((tag) => (
+                    <li key={tag} className="text-sm text-brand-text-primary flex items-center gap-2.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
                       {tag}
                     </li>
@@ -467,6 +268,283 @@ export function ServicesView() {
           })}
         </div>
       </section>
+
+      {/* Comprehensive services accordion */}
+      <section className="max-w-7xl mx-auto px-6 md:px-10 py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-4">
+            <span className="eyebrow">Full lifecycle</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-brand-ink mt-3 mb-5 tracking-tight">Our comprehensive services</h2>
+            <p className="text-brand-text-secondary leading-relaxed">
+              Every aspect of your software is accounted for — from the first line of code to production monitoring and beyond.
+            </p>
+          </div>
+          <div className="lg:col-span-8">
+            <div className="divide-y divide-brand-border border-t border-brand-border">
+              {AI_SERVICES.map((svc) => {
+                const open = openId === svc.id;
+                return (
+                  <div key={svc.id}>
+                    <button
+                      onClick={() => setOpenId(open ? null : svc.id)}
+                      className="w-full flex items-center justify-between gap-4 py-5 text-left group"
+                    >
+                      <span className={`text-lg font-semibold transition-colors ${open ? 'text-brand-accent' : 'text-brand-ink group-hover:text-brand-accent'}`}>
+                        {svc.title}
+                      </span>
+                      <span className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${open ? 'bg-brand-accent text-white' : 'bg-brand-surface text-brand-ink'}`}>
+                        {open ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                      </span>
+                    </button>
+                    {open && (
+                      <motion.p
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="text-brand-text-secondary leading-relaxed pb-6 max-w-2xl"
+                      >
+                        {svc.description}
+                      </motion.p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technologies */}
+      <section className="bg-brand-surface border-y border-brand-border py-24">
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <SectionHeading eyebrow="Tech stack" title="The technologies we use" center />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {TECHNOLOGIES.map((tech) => (
+              <div key={tech.name} className="card p-6">
+                <h3 className="font-bold text-brand-ink mb-2">{tech.name}</h3>
+                <p className="text-sm text-brand-text-secondary leading-relaxed">{tech.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export function MethodologyView() {
+  return (
+    <div>
+      {/* Hero */}
+      <section className="relative overflow-hidden pt-36 pb-20 px-6 md:px-10">
+        <div className="absolute -top-24 right-0 w-96 h-96 bg-brand-accent/10 rounded-full blur-[120px]" />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <div className="inline-flex items-center gap-2 mb-6 bg-brand-accent/10 px-3.5 py-1.5 rounded-full">
+            <span className="text-[11px] font-bold text-brand-accent-dark uppercase tracking-[0.18em]">The Agentic Edge</span>
+          </div>
+          <h1 className="text-4xl md:text-6xl font-black text-brand-ink leading-[1.05] tracking-tight mb-6">
+            4 senior experts. <span className="accent-gradient-text">100+ agents.</span> Unlimited precision.
+          </h1>
+          <p className="text-lg text-brand-text-secondary leading-relaxed max-w-2xl mx-auto">
+            We've replaced the bloat of junior-heavy teams with an orchestration layer where elite consultants lead a tireless agentic workforce.
+          </p>
+        </div>
+      </section>
+
+      {/* Orchestration core */}
+      <section className="max-w-7xl mx-auto px-6 md:px-10 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          <div className="lg:col-span-7 card p-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-brand-ink mb-4 tracking-tight">The Orchestration Core</h2>
+            <p className="text-brand-text-secondary text-lg leading-relaxed mb-8 max-w-xl">
+              Four world-class architects don't just write code; they design the system prompts, define constraints, and audit the output of a 24/7 agent workforce.
+            </p>
+            <div className="flex gap-3">
+              {CONSULTANTS.map((c) => (
+                <img key={c.id} src={c.image} alt={c.name} className="w-14 h-14 rounded-xl object-cover grayscale hover:grayscale-0 transition-all border border-brand-border" />
+              ))}
+            </div>
+          </div>
+          <div className="lg:col-span-5 card bg-brand-ink text-white flex flex-col items-center justify-center text-center p-10">
+            <div className="text-6xl font-black text-brand-accent mb-2">98%</div>
+            <div className="text-xs uppercase font-bold tracking-widest text-white/70">Automated code accuracy</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Process phases */}
+      <section className="bg-brand-surface border-y border-brand-border py-24">
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <SectionHeading eyebrow="The Process" title="A streamlined development approach" center />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {PROCESS_PHASES.map((p) => {
+              const Icon = iconMap[p.icon] ?? Workflow;
+              return (
+                <div key={p.num} className="card p-8">
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="text-5xl font-black text-brand-accent/15 leading-none">{p.num}</span>
+                    <span className="w-11 h-11 rounded-lg bg-brand-accent/10 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-brand-accent" />
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-brand-ink mb-2">Phase {p.num} · {p.title}</h3>
+                  <p className="text-sm text-brand-text-secondary leading-relaxed">{p.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* The Shift comparison */}
+      <section className="max-w-7xl mx-auto px-6 md:px-10 py-24">
+        <SectionHeading eyebrow="The Shift" title="Why agent-driven delivery wins" center />
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse card overflow-hidden">
+            <thead>
+              <tr className="border-b border-brand-border">
+                <th className="p-6 text-xs font-bold uppercase tracking-[0.18em] text-brand-text-secondary">Dimension</th>
+                <th className="p-6 text-xs font-bold uppercase tracking-[0.18em] text-brand-text-secondary">Traditional Dev Shop</th>
+                <th className="p-6 text-xs font-bold uppercase tracking-[0.18em] text-brand-accent-dark bg-brand-accent/5">The Sovereign Edge</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { dim: 'Team Dynamics', trad: '2 seniors + 12 juniors (high overhead)', edge: '4 seniors + an infinite agent workforce' },
+                { dim: 'Reliability', trad: 'Varies; manual peer reviews', edge: 'Deterministic prompts; multi-agent validation' },
+                { dim: 'Velocity', trad: 'Bi-weekly sprint cycles', edge: 'Daily feature production cycles' },
+              ].map((row, i, arr) => (
+                <tr key={row.dim} className={i < arr.length - 1 ? 'border-b border-brand-border' : ''}>
+                  <td className="p-6 font-bold text-brand-ink">{row.dim}</td>
+                  <td className="p-6 text-brand-text-secondary">{row.trad}</td>
+                  <td className="p-6 text-brand-ink font-medium bg-brand-accent/5">{row.edge}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export function ContactView() {
+  const [submitted, setSubmitted] = useState(false);
+
+  const inputClass = 'w-full bg-white border border-brand-border rounded-lg px-4 py-3 text-brand-ink placeholder:text-brand-text-secondary/60 focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/15 outline-none transition';
+
+  return (
+    <div className="pt-36 max-w-7xl mx-auto px-6 md:px-10">
+      <div className="mb-16 max-w-3xl">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="w-2 h-2 rounded-full bg-brand-accent animate-agent-pulse" />
+          <span className="eyebrow">Available for Q3 Engagements</span>
+        </div>
+        <h1 className="text-4xl md:text-6xl font-black text-brand-ink tracking-tight mb-6 leading-[1.05]">
+          Let's architect your <span className="accent-gradient-text">next release</span>
+        </h1>
+        <p className="text-lg text-brand-text-secondary leading-relaxed">
+          Connect with our lead consultants to define your project scope, security parameters, and deployment roadmap.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-24">
+        <div className="lg:col-span-8">
+          <div className="card p-8 md:p-10">
+            <h2 className="text-2xl font-bold text-brand-ink mb-8">Project inquiry</h2>
+            {submitted ? (
+              <div className="flex flex-col items-center text-center py-12">
+                <span className="w-16 h-16 rounded-full bg-brand-accent/10 flex items-center justify-center mb-5">
+                  <Check className="w-8 h-8 text-brand-accent" />
+                </span>
+                <h3 className="text-xl font-bold text-brand-ink mb-2">Inquiry received</h3>
+                <p className="text-brand-text-secondary max-w-md">
+                  Thanks — our team will review your project and respond within one business day.
+                </p>
+                <button onClick={() => setSubmitted(false)} className="btn-ghost px-6 py-3 text-sm mt-7">
+                  Submit another
+                </button>
+              </div>
+            ) : (
+              <form className="space-y-7" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-brand-ink">Lead contact</label>
+                    <input required type="text" placeholder="Full name" className={inputClass} />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-brand-ink">Enterprise email</label>
+                    <input required type="email" placeholder="name@company.com" className={inputClass} />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-brand-ink">Service track</label>
+                    <select className={inputClass}>
+                      <option>Custom App Development</option>
+                      <option>Legacy Modernization</option>
+                      <option>Cloud & Infrastructure</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-brand-ink">Target budget</label>
+                    <select className={inputClass}>
+                      <option>$50k - $100k</option>
+                      <option>$100k - $500k</option>
+                      <option>$500k+</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-semibold text-brand-ink">Timeline</label>
+                    <select className={inputClass}>
+                      <option>Next 30 days</option>
+                      <option>Next 3 months</option>
+                      <option>Strategic partnership</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-brand-ink">Technical requirements</label>
+                  <textarea required placeholder="Briefly describe the challenge..." rows={4} className={`${inputClass} resize-none`} />
+                </div>
+                <div className="flex justify-end">
+                  <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} type="submit" className="btn-primary px-8 py-3.5 text-sm">
+                    Initialize inquiry <ArrowRight className="w-4 h-4" />
+                  </motion.button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+
+        <div className="lg:col-span-4 space-y-6">
+          <div className="card p-8 space-y-7">
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-brand-text-secondary">Contact nodes</h3>
+            {[
+              { icon: MapPin, title: 'HQ — Berlin Hub', detail: 'Torstraße 112, 10119 Berlin' },
+              { icon: Mail, title: 'Email', detail: 'hello@sovereigntech.dev' },
+              { icon: Phone, title: 'Encrypted comms', detail: 'Signal: +49 176 000 0000' },
+            ].map((n) => (
+              <div key={n.title} className="flex gap-4">
+                <span className="w-11 h-11 rounded-lg bg-brand-accent/10 flex items-center justify-center shrink-0">
+                  <n.icon className="w-5 h-5 text-brand-accent" />
+                </span>
+                <div>
+                  <p className="font-bold text-brand-ink">{n.title}</p>
+                  <p className="text-sm text-brand-text-secondary">{n.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="card p-8 bg-brand-ink text-white">
+            <Users className="w-8 h-8 text-brand-accent mb-4" />
+            <h3 className="text-lg font-bold mb-2">Need a team, fast?</h3>
+            <p className="text-sm text-white/70 leading-relaxed">
+              Our agent workforce spins up in days, not months. Tell us the deadline and we'll tell you what's possible.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
