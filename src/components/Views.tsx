@@ -10,7 +10,7 @@ import {
   Landmark, HeartPulse, ShoppingCart, Boxes, Truck, Building2,
   Search, PencilRuler, Activity, Rocket, History, Network,
   Code2, ScanSearch, FlaskConical,
-  Plus, Minus, Mail, MapPin, Phone,
+  Plus, Minus, Mail, MapPin,
   type LucideIcon,
 } from 'lucide-react';
 import { AGENTS, COMPETENCIES, INDUSTRIES, PROCESS_PHASES, AI_SERVICES, TECHNOLOGIES } from '../constants';
@@ -486,7 +486,7 @@ export function ContactView() {
       'Technical requirements:',
       get('details'),
     ].join('\n');
-    window.location.href = `mailto:hello@howardtech.dev?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:howardtech.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
   };
 
@@ -516,7 +516,7 @@ export function ContactView() {
                 </span>
                 <h3 className="text-xl font-bold text-brand-ink mb-2">Your email is ready to send</h3>
                 <p className="text-brand-text-secondary max-w-md">
-                  We've opened a pre-filled message in your mail client — just hit send. If nothing opened, email us directly at hello@howardtech.dev.
+                  We've opened a pre-filled message in your mail client — just hit send. If nothing opened, email us directly at howardtech.dev@gmail.com.
                 </p>
                 <button onClick={() => setSubmitted(false)} className="btn-ghost px-6 py-3 text-sm mt-7">
                   Submit another
@@ -579,8 +579,7 @@ export function ContactView() {
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-brand-text-secondary">Contact nodes</h3>
             {[
               { icon: MapPin, title: 'HQ — Chicago', detail: 'Chicago, IL' },
-              { icon: Mail, title: 'Email', detail: 'hello@howardtech.dev' },
-              { icon: Phone, title: 'Encrypted comms', detail: 'Signal: +49 176 000 0000' },
+              { icon: Mail, title: 'Email', detail: 'howardtech.dev@gmail.com' },
             ].map((n) => (
               <div key={n.title} className="flex gap-4">
                 <span className="w-11 h-11 rounded-lg bg-brand-accent/10 flex items-center justify-center shrink-0">
