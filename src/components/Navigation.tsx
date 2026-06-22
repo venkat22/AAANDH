@@ -84,7 +84,7 @@ export function Footer({ onNavigate }: { onNavigate: (view: string) => void }) {
     },
   ];
 
-  const offices = ['Berlin', 'London', 'Singapore', 'Austin'];
+  const offices = ['Chicago', 'Des Moines'];
 
   return (
     <footer className="w-full bg-brand-ink text-white pt-20 pb-10 px-6 md:px-10">

@@ -578,7 +578,7 @@ export function ContactView() {
           <div className="card p-8 space-y-7">
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-brand-text-secondary">Contact nodes</h3>
             {[
-              { icon: MapPin, title: 'HQ — Berlin Hub', detail: 'Torstraße 112, 10119 Berlin' },
+              { icon: MapPin, title: 'HQ — Chicago', detail: 'Chicago, IL' },
               { icon: Mail, title: 'Email', detail: 'hello@howardtech.dev' },
               { icon: Phone, title: 'Encrypted comms', detail: 'Signal: +49 176 000 0000' },
             ].map((n) => (
