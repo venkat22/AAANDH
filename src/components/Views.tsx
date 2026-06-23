@@ -486,7 +486,7 @@ export function ContactView() {
       'Technical requirements:',
       get('details'),
     ].join('\n');
-    window.location.href = `mailto:howardtech.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:info@howardtech.solutions?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
   };
 
@@ -516,7 +516,7 @@ export function ContactView() {
                 </span>
                 <h3 className="text-xl font-bold text-brand-ink mb-2">Your email is ready to send</h3>
                 <p className="text-brand-text-secondary max-w-md">
-                  We've opened a pre-filled message in your mail client — just hit send. If nothing opened, email us directly at howardtech.dev@gmail.com.
+                  We've opened a pre-filled message in your mail client — just hit send. If nothing opened, email us directly at info@howardtech.solutions.
                 </p>
                 <button onClick={() => setSubmitted(false)} className="btn-ghost px-6 py-3 text-sm mt-7">
                   Submit another
@@ -579,7 +579,7 @@ export function ContactView() {
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-brand-text-secondary">Contact nodes</h3>
             {[
               { icon: MapPin, title: 'HQ — Chicago', detail: 'Chicago, IL' },
-              { icon: Mail, title: 'Email', detail: 'howardtech.dev@gmail.com' },
+              { icon: Mail, title: 'Email', detail: 'info@howardtech.solutions' },
             ].map((n) => (
               <div key={n.title} className="flex gap-4">
                 <span className="w-11 h-11 rounded-lg bg-brand-accent/10 flex items-center justify-center shrink-0">
